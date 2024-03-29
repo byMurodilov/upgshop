@@ -1,0 +1,206 @@
+{% extends "front/base.html" %}
+{% load static %}
+{% block content %}
+
+        <!-- Begin Slider Area -->
+        <div class="slider-area">
+
+            <!-- Main Slider -->
+            <div class="swiper-container main-slider swiper-arrow with-bg_white">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide animation-style-01">
+                        <div class="slide-inner style-1 bg-height" data-bg-image="{% static 'front/images/slider/bg/1-1.jpg' %}">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-6 order-2 order-lg-1 align-self-center">
+                                        <div class="slide-content text-black">
+                                            <span class="offer">65% Off</span>
+                                            <h2 class="title">New Plant</h2>
+                                            <p class="short-desc">Pronia, With 100% Natural, Organic & Plant Shop.</p>
+                                            <div class="btn-wrap">
+                                                <a class="btn btn-custom-size xl-size btn-pronia-primary" href="shop.html">Discover Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-8 offset-md-2 offset-lg-0 order-1 order-lg-2">
+                                        <div class="inner-img">
+                                            <div class="scene fill">
+                                                <div class="expand-width" data-depth="0.2">
+                                                    <img src="{% static 'front/images/slider/inner-img/1-1-524x617.png' %}" alt="Inner Image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide animation-style-01">
+                        <div class="slide-inner style-1 bg-height" data-bg-image="{% static 'front/images/slider/bg/1-1.jpg' %}">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-6 order-2 order-lg-1 align-self-center">
+                                        <div class="slide-content text-black">
+                                            <span class="offer">65% Off</span>
+                                            <h2 class="title">New Plant</h2>
+                                            <p class="short-desc">Pronia, With 100% Natural, Organic & Plant Shop.</p>
+                                            <div class="btn-wrap">
+                                                <a class="btn btn-custom-size xl-size btn-pronia-primary" href="shop.html">Discover Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-8 offset-md-2 offset-lg-0 order-1 order-lg-2">
+                                        <div class="inner-img">
+                                            <div class="scene fill">
+                                                <div class="expand-width" data-depth="0.2">
+                                                    <img src="{% static 'front/images/slider/inner-img/1-2-524x617.png' %}" alt="Inner Image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination d-md-none"></div>
+
+                <!-- Add Arrows -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+
+        </div>
+        <!-- Slider Area End Here -->
+
+        <!-- Begin Shipping Area -->
+        <div class="shipping-area section-space-top-100">
+            <div class="container">
+                <div class="shipping-bg">
+                    <div class="row shipping-wrap">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="shipping-item">
+                                <div class="shipping-img">
+                                    <img src="{% static 'front/images/shipping/icon/car.png' %}" alt="Shipping Icon">
+                                </div>
+                                <div class="shipping-content">
+                                    <h2 class="title">Free Shipping</h2>
+                                    <p class="short-desc mb-0">Capped at $319 per order</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                            <div class="shipping-item">
+                                <div class="shipping-img">
+                                    <img src="{% static 'front/images/shipping/icon/card.png' %}" alt="Shipping Icon">
+                                </div>
+                                <div class="shipping-content">
+                                    <h2 class="title">Safe Payment</h2>
+                                    <p class="short-desc mb-0">With our payment gateway</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+                            <div class="shipping-item">
+                                <div class="shipping-img">
+                                    <img src="{% static 'front/images/shipping/icon/service.png' %}" alt="Shipping Icon">
+                                </div>
+                                <div class="shipping-content">
+                                    <h2 class="title">Best Services</h2>
+                                    <p class="short-desc mb-0">Friendly & Supper Services</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shipping Area End Here -->
+
+        <!-- Begin Product Area -->
+        <div class="product-area section-space-top-100">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <h2 class="section-title mb-0">Our Products</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="nav product-tab-nav tab-style-1" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="active" id="featured-tab" data-bs-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="true">
+                                    Featured
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a id="bestseller-tab" data-bs-toggle="tab" href="#bestseller" role="tab" aria-controls="bestseller" aria-selected="false">
+                                    Bestseller
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a id="latest-tab" data-bs-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false">
+                                    Latest
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
+                                <div class="product-item-wrap row">
+                                    {% for product in products %}
+                                    <div class="col-xl-3 col-md-4 col-sm-6">
+                                        <div class="product-item">
+                                            <div class="product-img">
+                                                <a href="shop.html">
+                                                    <img class="primary-img" src="{{product.banner_img.url}}" alt="Product Images">
+                                                    <img class="secondary-img" src="{{product.banner_img.url}}" alt="Product Images">
+                                                </a>
+                                                <div class="product-add-action">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                                                <i class="pe-7s-like"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
+                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                                                <i class="pe-7s-look"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                                                <i class="pe-7s-cart"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <a class="product-name" href="shop.html">{{product.name}}</a>
+                                                <div class="price-box pb-1">
+                                                    {% if product.discount_price %}
+                                                    <span class="new-price" ><s style="margin-right:12px;">{{product.price}}</s>  {{product.discount_price}}</span>
+                                                    {% else %}
+                                                    <span class="new-price">{{product.price}}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="rating-box">
+                                                    <ul>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        
