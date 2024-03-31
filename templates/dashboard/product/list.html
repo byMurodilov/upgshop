@@ -1,15 +1,12 @@
 {% extends 'dashboard/base.html' %}
-
 {% block content %}
-
-
 <div class="main-content">
     <div class="page-header">
         <h2 class="header-title">SHOP</h2>
         <div class="header-sub-title">
             <nav class="breadcrumb breadcrumb-dash">
                 <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Dashboard</a>
-                <a class="breadcrumb-item" href="#">Category</a>
+                <a class="breadcrumb-item" href="#">Product</a>
                 <span class="breadcrumb-item active">List</span>
             </nav>
         </div>
@@ -17,20 +14,20 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-around">
-                <h4>Productlar ro`yxat</h4>
-                <div>
-                    <form class="input-group input-group-sm mb-3">
-                        <select name="category_id" class="form-control"  id="category-filter">
-                            <option value="0">All</option>
-                            {% for category in categorys %}
-                            <option value="{{category.id}}">{{category.name}}</option>
-                            {% endfor %}
-                        </select>
-                        <div class="input-group-prepend">
-                            <button class="input-group-text" id="inputGroup-sizing-sm" type="submit">Filter</button>
-                        </div>
-                    </form>
-                </div>
+            <h4>Productlar ro`yxat</h4>
+            <div>
+                <form class="input-group input-group-sm mb-3">
+                    <select name="category_code" class="form-control">
+                        <option value="0">All</option>
+                        {% for category in categories %}
+                        <option value="{{category.code}}" {% if category.code == category_code %} selected {% endif %}>{{category}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group-prepend">
+                        <button class="input-group-text" id="inputGroup-sizing-sm" type="submit">Filter</button>
+                    </div>
+                </form>
+            </div>
             </div>
             <div class="m-t-25">
                 <div class="table-responsive">
@@ -50,10 +47,10 @@
                                 <td>{{q.category.name}}</td>
                                 <td>{{q.name}}</td>
                                 <td>
-                                    <a href="{% url 'dashboard:product_detail' q.id %}" class="btn btn-icon btn-hover btn-sm btn-rounded">
+                                    <a href="{% url 'dashboard:product_detail' q.code %}" class="btn btn-icon btn-hover btn-sm btn-rounded">
                                         <i class="anticon anticon-eye"></i>
                                     </a>
-                                    <a href="{% url 'dashboard:product_update' q.id %}" class="btn btn-icon btn-hover btn-sm btn-rounded">
+                                    <a href="{% url 'dashboard:product_update' q.code %}" class="btn btn-icon btn-hover btn-sm btn-rounded">
                                         <i class="anticon anticon-edit"></i>
                                     </a>
                                     <button type="button" class="btn btn-icon btn-hover btn-sm btn-rounded" data-toggle="modal" data-target=".bd-example-modal-sm{{forloop.counter}}">
@@ -72,7 +69,7 @@
                                                     <b>{{q.name}}ni o`chirmoqchimisiz?</b>
                                                 </div>
                                                 <div class="btn-group">
-                                                    <form method="post" action="{% url 'dashboard:product_delete' q.id %}">
+                                                    <form method="post" action="{% url 'dashboard:product_delete' q.code %}">
                                                         {% csrf_token %}
                                                     <button type="submit" class="btn btn-primary btn-tone">Ha</button>
                                                     <button class="btn btn-danger btn-tone" type="button" data-dismiss="modal">Yo`q</button>

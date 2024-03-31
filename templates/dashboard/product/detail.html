@@ -35,7 +35,7 @@
                                     <b>{{queryset.name}}ni o`chirmoqchimisiz?</b>
                                 </div>
                                 <div class="btn-group">
-                                    <form method="post" action="{% url 'dashboard:product_delete' queryset.id %}">
+                                    <form method="post" action="{% url 'dashboard:product_delete' queryset.code %}">
                                         {% csrf_token %}
                                     <button type="submit" class="btn btn-primary btn-tone">Ha</button>
                                     <button class="btn btn-danger btn-tone" type="button" data-dismiss="modal">Yo`q</button>
@@ -59,7 +59,7 @@
                         {% endfor %}
                     </div>
                     <div class="m-t-10">
-                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Qoldiq: </span>
+                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Qoldiqlar soni: </span>
                         <span>{{queryset.quantity}}</span>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="card-body">
                         <video width="320" height="240" controls>
                             <source src="{{i.video.url}}" type="video/mp4">
-                            Your browser does not support the video tag.
+                            Your browser does not support the video tag!
                         </video>
                     </div>
                     {% endfor %}
@@ -92,7 +92,7 @@
                         {% endif %}
                     </div>
                     <div class="m-t-10">
-                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Yetkazib berish: </span>
+                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Yetkazib berish xizmati: </span>
                         {% if queryset.delivery %}
                         <button class="btn btn-primary" >Mavjud</button>
                         {% else %}
