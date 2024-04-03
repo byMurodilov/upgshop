@@ -1,21 +1,29 @@
 from django.shortcuts import render, redirect
+from main.funcs import staff_required
 from main import models
 
+
+@staff_required
 def index(request):
     context = {}
     return render(request, 'dashboard/index.html', context)
 
-
 # ---------CATEGORY-------------
+
+@staff_required
 def category_list(request):
     queryset = models.Category.objects.all()
-    context = {'queryset':queryset}
+    context = {
+        'queryset':queryset
+        }
     return render(request, 'dashboard/category/list.html', context)
 
-
+@staff_required
 def category_create(request):
     if request.method == 'POST':
-        models.Category.objects.create(name = request.POST['name'])
+        models.Category.objects.create(
+            name = request.POST['name']
+        )
         return redirect('dashboard:category_list')
     return render(request, 'dashboard/category/create.html')
 
@@ -32,12 +40,11 @@ def category_delete(request, code):
     queryset.delete()
     return redirect('dashboard:category_list')
 
-
 # ---------PRODUCT----------------
+
 def product_list(request):
     categories = models.Category.objects.all()
     category_code = request.GET.get('category_code')
-
     if category_code and category_code != '0':
         queryset = models.Product.objects.filter(category__code=category_code)
     else:
@@ -97,6 +104,7 @@ def product_create(request):
 
 
 def product_update(request, code):
+
     images = models.ProductImg.objects.filter(product__code=code)
     videos = models.ProductVideo.objects.filter(product__code=code)
     categories = models.Category.objects.all()
@@ -110,7 +118,6 @@ def product_update(request, code):
         product.name = request.POST.get('name')
         product.body = request.POST.get('body')
         product.price = request.POST.get('price')
-        product.quantity = request.POST.get('quantity')
         product.delivery = delivery
         product.save()
     
@@ -133,7 +140,6 @@ def product_update(request, code):
           'videos':videos,
           'categories':categories,
           'product':product
-
     }
     return render(request,'dashboard/product/update.html',context=context)
 
@@ -154,3 +160,51 @@ def product_video_delete(request, id):
     product_video = models.ProductVideo.objects.get(id=id)
     product_video.delete()
     return redirect('dashboard:product_update',product_video.product_id)
+
+
+def product_enter(request):
+    if request.method == 'POST':
+        product = models.Product.objects.get(code=request.POST['code'])
+        quantity = request.POST['quantity']
+        models.EnterProduct.objects.create(
+            product=product,
+            quantity=quantity
+        )
+        return redirect()
+    return render(request, 'dashboard/product/enter.html')
+
+
+def list_product_enter(request):
+    queryset = models.EnterProduct.objects.all()
+    context = {'queryset':queryset}
+    return render(request, 'dashboard/product/enter.html', context)
+
+
+def detail_product_enter(request, code):
+    queryset = models.EnterProduct.objects.filter(product__code=code)
+    context = {'queryset':queryset}
+    return render(request, 'dashboard/product/enter.html', context)
+
+
+def product_history(request, code):
+    queryset = models.EnterProduct.objects.filter(product__code=code)
+    outs = models.CartProduct.objects.filter(product__code=code, cart__is_active=False)
+    result = queryset.union(outs)
+    context = {
+        'queryset':queryset,
+        'outs': outs,
+        'result': result
+    }
+    return render(request, 'dashboard/product/enter.html')
+    
+
+def product_enter_create(request, code):
+    code = models.EnterProduct.objects.all()
+    products = models.Product.objects.all()
+    queryset = models.EnterProduct.objects.filter(product__code=code)
+    context = {
+          'products':products,
+          'queryset':queryset,
+          'code':code,
+    }
+    return render(request, 'dashboard/product/create.html', context)

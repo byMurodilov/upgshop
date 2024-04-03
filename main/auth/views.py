@@ -4,6 +4,22 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 
+def log_in(request):
+    if request.method == 'POST':
+        try:
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('front:index')
+            else:
+                return render(request,'front/auth/login.html')
+        except:
+            return redirect('login')
+    return render(request, 'front/auth/login.html')
+
+
 def register(request):
     if request.method == 'POST':
         try:
@@ -27,22 +43,6 @@ def register(request):
     return render(request, 'front/auth/register.html')
 
 
-def log_in(request):
-    if request.method == 'POST':
-        try:
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('front:index')
-            else:
-                return render(request,'front/auth/login.html')
-        except:
-            return redirect('login')
-    return render(request, 'front/auth/login.html')
-
-
 def log_out(request):
     logout(request)
     return redirect('front:index')
@@ -50,6 +50,7 @@ def log_out(request):
 
 @login_required(login_url='auth:login')
 def profile(request):
+    queryset = models.Cart.objects.filter(user=request.user, is_active=False)
     if request.method == 'POST':
         username = request.user.username
         f_name = request.POST.get('f_name')
@@ -67,8 +68,9 @@ def profile(request):
                 user.set_password(new_password)
             user.save()
             return redirect('auth:profile')
-        # return redirect('front:profile')
-    return render(request, 'front/auth/profile.html')
+        
+    context = {'queryset':queryset}
+    return render(request, 'front/auth/profile.html',context)
 
 
 @login_required(login_url='auth:login')

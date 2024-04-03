@@ -1,10 +1,8 @@
 {% extends 'front/base.html' %}
 {% load static %}
-
 {% block content %}
         <!-- Begin Slider Area -->
         <div class="slider-area">
-
             <!-- Main Slider -->
             <div class="swiper-container main-slider swiper-arrow with-bg_white">
                 <div class="swiper-wrapper">
@@ -129,7 +127,7 @@
                         <ul class="nav product-tab-nav tab-style-1" id="myTab" role="tablist">
                             {% for category in categories %}
                             <li class="nav-item" role="presentation">
-                                <a href="{% url 'front:product_list' category.id %}">
+                                <a href="{% url 'front:product_list' category.code %}">
                                     {{category.name}}
                                 </a>
                             </li>
@@ -158,9 +156,12 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
+                                                            <form method="post">
+                                                                {% csrf_token %}
+                                                                <button type="submit" name="product_id" value="{{product.id}}" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                                                    <i class="pe-7s-cart"></i>
+                                                                </button>
+                                                            </form>
                                                         </li>
                                                     </ul>
                                                 </div>

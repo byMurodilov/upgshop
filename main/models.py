@@ -4,15 +4,12 @@ from random import sample
 import string
 
 
-
 class CodeGenerate(models.Model):
     code = models.CharField(max_length=255, blank=True,unique=True)
-    
     @staticmethod
     def generate_code():
         return ''.join(sample(string.ascii_letters + string.digits, 15)) 
     
-
     def save(self, *args, **kwargs):
         if not self.id:
             while True:
@@ -21,7 +18,6 @@ class CodeGenerate(models.Model):
                     self.code = code
                     break
         super(CodeGenerate,self).save(*args, **kwargs)
-
 
     class Meta:
         abstract = True
@@ -32,12 +28,13 @@ class User(AbstractUser):
     address = models.CharField(max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True, null=True)
     zip_code = models.IntegerField(blank=True, null=True)
-    
 
+    def __str__(self):
+        return f'{self.username}'
+    
     class Meta(AbstractUser.Meta):
         swappable = "AUTH_USER_MODEL"
     
-
     def save(self, *args, **kwargs):
         if not self.avatar:
             self.avatar = 'default.png'
@@ -48,7 +45,7 @@ class Category(CodeGenerate):
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
 
 class Product(CodeGenerate):
@@ -61,17 +58,50 @@ class Product(CodeGenerate):
     banner_img = models.ImageField(upload_to='banner-img/')
     quantity = models.IntegerField() 
     delivery = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.name}'
     
+    @property
+    def stock_status(self):
+        return bool(self.quantity)
+
+
+class EnterProduct(CodeGenerate):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    quantity = models.PositiveIntegerField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.product.name}'
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+
+            object = EnterProduct.objects.get(id=self.id)
+            self.product.quantity -= object.quantity
+
+        self.product.quantity +=self.quantity
+        self.product.save()
+        
+        super(EnterProduct, self).save(*args, **kwargs)
+
 
 class ProductImg(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     img = models.ImageField(upload_to='img/')
+
+    def __str__(self):
+        return f'{self.product.name}'
 
 
 class ProductVideo(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     video = models.FileField(upload_to='video', blank=True, null=True)
     link = models.URLField(null=True, blank=True)
+    
+    def __str__(self):
+        return f'{self.product.name}'
 
 
 class Review(models.Model):
@@ -79,7 +109,9 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-
+    
+    def __str__(self):
+        return f'{self.product.name}, {self.user.username}, {self.text}'
 
     def save(self, *args, **kwargs):
         if self.pk:
@@ -99,6 +131,9 @@ class Cart(CodeGenerate):
     user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
     is_active = models.BooleanField(default=True)
     order_date = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.user.username},{self.is_active}'
 
     @property
     def total(self):
@@ -133,6 +168,9 @@ class CartProduct(models.Model):
     cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
     count = models.IntegerField()
 
+    def __str__(self):
+        return f'{self.product.name,self.count,self.cart.is_active}'
+
     @property
     def price(self):
         count = self.count * self.product.price
@@ -142,3 +180,11 @@ class CartProduct(models.Model):
 class WishList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user.username},{self.product.name}'
+    
+    def save(self, *args, **kwargs):
+        if WishList.objects.filter(user=self.user, product=self.product).count():
+            raise ValueError('Dual')
+        super(WishList, self).save(*args, **kwargs)

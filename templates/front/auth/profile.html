@@ -49,7 +49,7 @@
                                             <p>Hello <b>{{user.username}}</b>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
+                                    <div class="tab-pane fade active show" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
                                         <div class="myaccount-orders">
                                             <h4 class="small-title">MY ORDERS</h4>
                                             <div class="table-responsive">
@@ -58,26 +58,20 @@
                                                         <tr>
                                                             <th>ORDER</th>
                                                             <th>DATE</th>
-                                                            <th>STATUS</th>
+                                                            <th>PRICE</th>
                                                             <th>TOTAL</th>
                                                             <th></th>
                                                         </tr>
-                                                        <tr>
-                                                            <td><a class="account-order-id" href="#">#5364</a></td>
-                                                            <td>Mar 27, 2019</td>
-                                                            <td>On Hold</td>
-                                                            <td>$162.00 for 2 items</td>
-                                                            <td><a href="#" class="btn btn-dark"><span>View</span></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><a class="account-order-id" href="#">#5356</a></td>
-                                                            <td>Mar 27, 2019</td>
-                                                            <td>On Hold</td>
-                                                            <td>$162.00 for 2 items</td>
-                                                            <td><a href="#" class="btn btn-dark"><span>View</span></a>
-                                                            </td>
-                                                        </tr>
+                                                        {% for q in queryset %}
+                                                            <tr>
+                                                                <td><a class="account-order-id" href="#">#{{q.code}}</a></td>
+                                                                <td>{{q.order_date}}</td>
+                                                                <td>{{q.price}}</td>
+                                                                <td>{{q.total}}</td>
+                                                                <td><a href="{% url 'front:cart_detail' q.code %}" class="btn btn-dark"><span>View</span></a>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -108,11 +102,11 @@
                                                 {% csrf_token %}
                                                 <div class="myaccount-form-inner">
                                                     <div class="single-input single-input-half">
-                                                        <label>First Name</label>
+                                                        <label>First Name*</label>
                                                         <input type="text" value="{{user.first_name}}" name="f_name">
                                                     </div>
                                                     <div class="single-input single-input-half">
-                                                        <label>Last Name</label>
+                                                        <label>Last Name*</label>
                                                         <input type="text" value="{{user.last_name}}" name="l_name">
                                                     </div>
                                                     <div class="single-input">

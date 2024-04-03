@@ -1,4 +1,5 @@
 {% extends 'dashboard/base.html' %}
+
 {% block content %}
 <div class="main-content">
     <div class="page-header">
@@ -59,7 +60,7 @@
                         {% endfor %}
                     </div>
                     <div class="m-t-10">
-                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Qoldiqlar soni: </span>
+                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Qoldiq: </span>
                         <span>{{queryset.quantity}}</span>
                     </div>
                 </div>
@@ -68,14 +69,14 @@
                     <div class="card-body">
                         <video width="320" height="240" controls>
                             <source src="{{i.video.url}}" type="video/mp4">
-                            Your browser does not support the video tag!
+                            Your browser does not support the video tag.
                         </video>
                     </div>
                     {% endfor %}
                 </div>
                 <div class="d-md-flex m-t-30 align-items-center justify-content-between">
                     <div class="m-t-10">
-                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Narx: </span>
+                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Narxi: </span>
                         {% if queryset.discount_price %}
                         <span><s>{{queryset.price}}</s></span>
                         {% else %}
@@ -84,7 +85,7 @@
                      
                     </div>
                     <div class="m-t-10">
-                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Chegirmadagi narx: </span>
+                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Chegirmadagi narxi: </span>
                         {% if queryset.discount_price %}
                         <span>{{queryset.discount_price}}</span>
                         {% else %}
@@ -92,7 +93,7 @@
                         {% endif %}
                     </div>
                     <div class="m-t-10">
-                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Yetkazib berish xizmati: </span>
+                        <span class="font-weight-semibold m-r-10 m-b-5 text-dark">Yetkazib berish: </span>
                         {% if queryset.delivery %}
                         <button class="btn btn-primary" >Mavjud</button>
                         {% else %}

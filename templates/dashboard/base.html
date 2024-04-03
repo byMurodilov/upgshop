@@ -1,6 +1,6 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,15 +8,11 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{% static 'dashboard/images/logo/favicon.png' %}">
-
     <!-- page css -->
     <link href="{% static 'dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" rel="stylesheet">
-
     <!-- Core css -->
     <link href="{% static 'dashboard/css/app.min.css' %}" rel="stylesheet">
-
 </head>
-
 <body>
     <div class="app">
         <div class="layout">
@@ -61,7 +57,7 @@
                                             <img src="{% static 'dashboard/images/avatars/thumb-3.jpg' %}" alt="">
                                         </div>
                                         <div class="m-l-10">
-                                            <p class="m-b-0 text-dark font-weight-semibold">Marshall Nichols</p>
+                                            <p class="m-b-0 text-dark font-weight-semibold">Jonny Cage</p>
                                             <p class="m-b-0 opacity-07">UI/UX Desinger</p>
                                         </div>
                                     </div>
@@ -108,8 +104,6 @@
                 </div>
             </div>    
             <!-- Header END -->
-
-
             <!-- Side Nav START -->
             <div class="side-nav">
                 <div class="side-nav-inner">
@@ -191,33 +185,13 @@
                                 </li> -->
                             </ul>
                         </li>
-                       
-                        
+                
                     </ul>
                 </div>
             </div>
             <!-- Side Nav END -->
-
-            <!-- Page Container START -->
-            <div class="page-container">
-                
                 {% block content %}
                 {% endblock %}
-                <!-- Footer START -->
-                <footer class="footer">
-                    <div class="footer-content">
-                        <p class="m-b-0">Copyright © 2019 Theme_Nate. All rights reserved.</p>
-                        <span>
-                            <a href="" class="text-gray m-r-15">Term &amp; Conditions</a>
-                            <a href="" class="text-gray">Privacy &amp; Policy</a>
-                        </span>
-                    </div>
-                </footer>
-                <!-- Footer END -->
-
-            </div>
-            <!-- Page Container END -->
-
         </div>
     </div>
 
@@ -229,11 +203,7 @@
     <script src="{% static 'dashboard/vendors/chartjs/Chart.min.js' %}"></script>
     <script src="{% static 'dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
     <script src="{% static 'dashboard/js/pages/dashboard-project.js' %}"></script>
-    
-
     <!-- Core JS -->
     <script src="{% static 'dashboard/js/app.min.js' %}"></script>
-
 </body>
-
 </html>

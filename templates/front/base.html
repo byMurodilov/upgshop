@@ -95,6 +95,7 @@
                                             <ul class="dropdown-menu" aria-labelledby="settingButton">
                                                 {% if user.is_authenticated %}
                                                 <li><a class="dropdown-item" href="{% url 'auth:profile' %}">My account</a></li>
+                                                <li><a class="dropdown-item" href="{% url 'front:active_cart' %}">My active cart</a></li>
                                                 <li><a class="dropdown-item" href="{% url 'auth:logout' %}">Logout</a>
                                                 {% else %}
                                                 <li><a class="dropdown-item" href="{% url 'auth:login' %}">Login</a>
@@ -133,10 +134,17 @@
                                 <nav class="main-nav">
                                     <ul>
                                         <li class="drop-holder">
-                                            <a href="index.html">Home</a>
+                                            <a href="{% url 'front:index' %}">Home</a>
                                         </li>
-                                        <li class="megamenu-holder">
-                                            <a href="shop.html">Shop</a>
+                                        <li class="drop-holder">
+                                            <a href="blog.html">Category</a>
+                                            <ul class="drop-menu">
+                                                {% for category in categories %}
+                                                <li>
+                                                    <a href="{% url 'front:product_list' category.code %}">{{category.name}}</a>
+                                                </li>                                                  
+                                                {% endfor %}
+                                            </ul>
                                         </li>
                                         <li class="drop-holder">
                                             <a href="blog.html">Blog</a>
@@ -375,7 +383,8 @@
 
 <!--Main JS (Common Activation Codes)-->
 <script src="{% static 'front/js/main.js' %}"></script>
-
+{% block js %}
+{% endblock %}
 </body>
 
 </html>

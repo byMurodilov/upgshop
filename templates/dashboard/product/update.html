@@ -1,5 +1,8 @@
 {% extends 'dashboard/base.html' %}
+
 {% block content %}
+
+                
     <!-- Content Wrapper START -->
     <div class="main-content">
         <div class="page-header">
@@ -38,43 +41,37 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Narxi</label>
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Narx</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" id="inputPassword3" value="{{product.price}}" name="price">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Soni yoki Miqdori</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="inputPassword3" value="{{product.quantity}}" name="quantity">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Yetkazib berish xizmati</label>
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Yetkazib berish</label>
                             <div class="col-sm-10">                                
                                 <input type="checkbox" id="inputPassword3" placeholder="..." name="delivery" {% if product.delivery %} checked {% endif %}>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Batafsil ma'lumot olish</label>
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Batafsil</label>
                             <div class="col-sm-10">
                                 <textarea name="body" class="form-control" cols="30" rows="10">{{product.body}}</textarea>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Banner uchun rasm</label>
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Banner rasm</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="inputPassword3" name="banner_img">
                             </div>
                         </div>                        
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Boshqa rasmlar</label>
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Product rasmlar</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="inputPassword3" name="product_img" multiple>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Video joylash</label>
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Product videolar</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="inputPassword3" name="product_video" multiple>
                             </div>
@@ -121,7 +118,7 @@
                         {% for video in videos %}
                             <video width="320" height="240" controls>
                                 <source src="{{video.video.url}}" type="video/mp4">
-                                Your browser does not support the video tag!
+                                Your browser does not support the video tag.
                             </video>
                         <button type="button" class="btn btn-icon btn-hover btn-sm btn-rounded btn-danger" data-toggle="modal" data-target=".bd-example-modal-sms{{forloop.counter0}}">
                             <i class="anticon anticon-delete"></i>
